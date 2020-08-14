@@ -1,5 +1,15 @@
+html,
+body {
+    height: 100%;
+    height: 100%;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+}
+
 #contact-list-container {
     border-color: grey;
     border-width: thin;
     border-style: solid;
+    height: 100%;
 }
