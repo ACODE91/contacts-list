@@ -5,6 +5,11 @@ body {
     border-color: black;
     border-width: thin;
     border-style: solid;
+
+}
+
+#app {
+    height: 100%;
 }
 
 #contact-list-container {
