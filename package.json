@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ACODE91/contacts-list/issues"
   },
-  "homepage": "https://github.com/ACODE91/contacts-list#readme"
+  "homepage": "https://github.com/ACODE91/contacts-list#readme",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
 }
