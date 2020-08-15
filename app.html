@@ -8,15 +8,15 @@
   </head>
 
   <body>
-    <div id="app" class="float-container">
-      <h1>Aaron's Contact List</h1>
-      <div id="contact-list-container" class="float-child">
+    <div id="app">
+      <div id="contact-list-container" class="flex-child">
+        <h1>Aaron's Contact List</h1>
         Placeholder for contact list container
         <div class="search-bar-container"></div>
-        <button type="button" onclick="showNewContactForm()">No Name</button>
+        <div onclick="changeContact()">No Name</div>
       </div>
 
-      <div id="new-contact-container" class="float-child">
+      <div id="contact-container" class="flex-child">
         <form action="">
           <input type="text" id="fname" name="fname" placeholder="First" />
           <input type="text" id="lname" name="lname" placeholder="Last" />
@@ -24,16 +24,16 @@
             <span><button>Info</button></span>
             <span><button>Picture</button></span>
           </div>
-          <label for="mobile">Mobile:</label>
+          <label>Mobile:</label>
           <input type="text" id="mobile" name="mobile" placeholder="Phone" /><br />
-          <label for="email">Home:</label>
+          <label>Home:</label>
           <input type="text" id="email" name="email" placeholder="email" /><br />
           <input type="submit" value="+" />
         </form>
       </div>
     </div>
     <script>
-      function showNewContactForm() {
+      function changeContact() {
         // TODO render and show new contact form
       }
     </script>
