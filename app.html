@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -13,30 +12,94 @@
         <h1>Aaron's Contact List</h1>
         Placeholder for contact list container
         <div class="search-bar-container"></div>
-        <div onclick="changeContact()">Aaron Lao</div>
-        <div onclick="changeContact()">No Name</div>
       </div>
 
       <div id="contact-container">
         <form action="">
-          <input type="text" id="fname" name="fname" placeholder="First" />
-          <input type="text" id="lname" name="lname" placeholder="Last" />
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            placeholder="First"
+          />
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            placeholder="Last"
+          />
           <div>
             <span><button>Info</button></span>
             <span><button>Picture</button></span>
           </div>
           <label>Mobile:</label>
-          <input type="text" id="mobile" name="mobile" placeholder="Phone" /><br />
+          <input
+            type="text"
+            id="mobile"
+            name="mobile"
+            placeholder="Phone"
+          /><br />
           <label>Home:</label>
-          <input type="text" id="email" name="email" placeholder="email" /><br />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="email"
+          /><br />
           <input type="submit" value="+" />
         </form>
       </div>
     </div>
     <script>
-      function changeContact() {
-        // TODO render and show new contact form
+      // Contact List class to create and manage contacts
+      class ContactList {
+        constructor() {
+          this.contactListElement = document.createElement('div');
+          this.contactListElement.setAttribute('id', 'contact-list');
+          // Contacts placeholders
+          this.contacts = [
+            new Contact('Aaron'),
+            new Contact('No Name'),
+          ];
+
+          this.appendAllContacts();
+        }
+
+        // Append contacts to list
+        appendAllContacts() {
+          for (const contact of this.contacts) {
+            this.contactListElement.appendChild(
+              contact.contactElement,
+            );
+          }
+        }
+
+        changeContact() {
+          // TODO render and show new contact form
+        }
       }
+      // Contact class to create contact instances
+      class Contact {
+        constructor(contactName) {
+          this.contactElement = document.createElement('div');
+          this.contactElement.setAttribute('class', 'contact');
+          this.contactElement.textContent = contactName;
+        }
+      }
+
+      const ContactListComponent = new ContactList();
+
+      function initializeDOM() {
+        const contactListContainer = document.getElementById(
+          'contact-list-container',
+        );
+        // Attaches contact list element to contact list container
+        contactListContainer.appendChild(
+          ContactListComponent.contactListElement,
+        );
+      }
+
+      initializeDOM();
     </script>
   </body>
 </html>
