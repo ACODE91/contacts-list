@@ -10,9 +10,24 @@ body {
 
 #app {
     height: 100%;
+    display: flex;
 }
 
 #contact-list-container {
+    flex: 1;
+    border: 2px solid yellow;
+    border-color: grey;
+    border-width: thin;
+    border-style: solid;
+    height: 100%;
+    width: 30%;
+}
+
+.flex-child {
+    flex: 1;
+}
+
+#contact-container {
     border-color: grey;
     border-width: thin;
     border-style: solid;
