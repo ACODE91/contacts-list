@@ -76,14 +76,24 @@
 
         changeContact() {
           // TODO render and show new contact form
+          console.log('clicked');
         }
       }
+
       // Contact class to create contact instances
       class Contact {
         constructor(contactName) {
           this.contactElement = document.createElement('div');
           this.contactElement.setAttribute('class', 'contact');
+          this.contactElement.addEventListener(
+            'click',
+            this.handleClick,
+          );
           this.contactElement.textContent = contactName;
+        }
+
+        handleClick() {
+          console.log('clicked');
         }
       }
 
