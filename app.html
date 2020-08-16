@@ -51,15 +51,30 @@
       </div>
     </div>
     <script>
+      // For generating unique ids for each element.
+      function generateUniqueClassId() {
+        const uniqueId = Math.random().toString(36).slice(2);
+        return uniqueId;
+      }
       // Contact List class to create and manage contacts
       class ContactList {
         constructor() {
           this.contactListElement = document.createElement('div');
           this.contactListElement.setAttribute('id', 'contact-list');
+          this.currentSelectedContactId = null;
           // Contacts placeholders
+          this.handleClick = this.handleClick.bind(this);
           this.contacts = [
-            new Contact('Aaron'),
-            new Contact('No Name'),
+            new Contact(
+              'Aaron',
+              generateUniqueClassId(),
+              this.handleClick,
+            ),
+            new Contact(
+              'No Name',
+              generateUniqueClassId(),
+              this.handleClick,
+            ),
           ];
 
           this.appendAllContacts();
@@ -74,26 +89,41 @@
           }
         }
 
-        changeContact() {
-          // TODO render and show new contact form
-          console.log('clicked');
+        handleClick(event) {
+          const selectedElementUniqueId = event.target.className;
+          const targetElement = document.getElementsByClassName(
+            selectedElementUniqueId,
+          )[0];
+
+          if (!this.currentSelectedContactId) {
+            this.currentSelectedContactId = selectedElementUniqueId;
+          } else if (
+            this.currentSelectedContactId &&
+            this.currentSelectedContactId !== selectedElementUniqueId
+          ) {
+            const previousElement = document.getElementsByClassName(
+              this.currentSelectedContactId,
+            )[0];
+            // Revert color to black
+            previousElement.style.color = 'black';
+            // Reassign new current element
+            this.currentSelectedContactId = selectedElementUniqueId;
+          }
+
+          targetElement.style.color = 'blue';
         }
       }
 
       // Contact class to create contact instances
       class Contact {
-        constructor(contactName) {
+        constructor(contactName, uniqueId, handleClick) {
           this.contactElement = document.createElement('div');
-          this.contactElement.setAttribute('class', 'contact');
-          this.contactElement.addEventListener(
-            'click',
-            this.handleClick,
+          this.contactElement.setAttribute(
+            'class',
+            `contact ${uniqueId}`,
           );
+          this.contactElement.addEventListener('click', handleClick);
           this.contactElement.textContent = contactName;
-        }
-
-        handleClick() {
-          console.log('clicked');
         }
       }
 
