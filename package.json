@@ -1,0 +1,22 @@
+{
+  "name": "contacts-list",
+  "version": "1.0.0",
+  "description": "Apple's Contacts App Clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ACODE91/contacts-list.git"
+  },
+  "author": "alao johnlin1214",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ACODE91/contacts-list/issues"
+  },
+  "homepage": "https://github.com/ACODE91/contacts-list#readme",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
+}

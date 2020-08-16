@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,33 +8,138 @@
 
   <body>
     <div id="app">
-      <div id="contact-list-container" class="flex-child">
+      <div id="contact-list-container">
         <h1>Aaron's Contact List</h1>
         Placeholder for contact list container
         <div class="search-bar-container"></div>
-        <div onclick="changeContact()">No Name</div>
       </div>
 
-      <div id="contact-container" class="flex-child">
+      <div id="contact-container">
         <form action="">
-          <input type="text" id="fname" name="fname" placeholder="First" />
-          <input type="text" id="lname" name="lname" placeholder="Last" />
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            placeholder="First"
+          />
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            placeholder="Last"
+          />
           <div>
             <span><button>Info</button></span>
             <span><button>Picture</button></span>
           </div>
           <label>Mobile:</label>
-          <input type="text" id="mobile" name="mobile" placeholder="Phone" /><br />
+          <input
+            type="text"
+            id="mobile"
+            name="mobile"
+            placeholder="Phone"
+          /><br />
           <label>Home:</label>
-          <input type="text" id="email" name="email" placeholder="email" /><br />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="email"
+          /><br />
           <input type="submit" value="+" />
         </form>
       </div>
     </div>
     <script>
-      function changeContact() {
-        // TODO render and show new contact form
+      // For generating unique ids for each element.
+      function generateUniqueClassId() {
+        const uniqueId = Math.random().toString(36).slice(2);
+        return uniqueId;
       }
+      // Contact List class to create and manage contacts
+      class ContactList {
+        constructor() {
+          this.contactListElement = document.createElement('div');
+          this.contactListElement.setAttribute('id', 'contact-list');
+          this.currentSelectedContactId = null;
+          // Contacts placeholders
+          this.handleClick = this.handleClick.bind(this);
+          this.contacts = [
+            new Contact(
+              'Aaron',
+              generateUniqueClassId(),
+              this.handleClick,
+            ),
+            new Contact(
+              'No Name',
+              generateUniqueClassId(),
+              this.handleClick,
+            ),
+          ];
+
+          this.appendAllContacts();
+        }
+
+        // Append contacts to list
+        appendAllContacts() {
+          for (const contact of this.contacts) {
+            this.contactListElement.appendChild(
+              contact.contactElement,
+            );
+          }
+        }
+
+        handleClick(event) {
+          const selectedElementUniqueId = event.target.className;
+          const targetElement = document.getElementsByClassName(
+            selectedElementUniqueId,
+          )[0];
+
+          if (!this.currentSelectedContactId) {
+            this.currentSelectedContactId = selectedElementUniqueId;
+          } else if (
+            this.currentSelectedContactId &&
+            this.currentSelectedContactId !== selectedElementUniqueId
+          ) {
+            const previousElement = document.getElementsByClassName(
+              this.currentSelectedContactId,
+            )[0];
+            // Revert color to black
+            previousElement.style.color = 'black';
+            // Reassign new current element
+            this.currentSelectedContactId = selectedElementUniqueId;
+          }
+
+          targetElement.style.color = 'blue';
+        }
+      }
+
+      // Contact class to create contact instances
+      class Contact {
+        constructor(contactName, uniqueId, handleClick) {
+          this.contactElement = document.createElement('div');
+          this.contactElement.setAttribute(
+            'class',
+            `contact ${uniqueId}`,
+          );
+          this.contactElement.addEventListener('click', handleClick);
+          this.contactElement.textContent = contactName;
+        }
+      }
+
+      const ContactListComponent = new ContactList();
+
+      function initializeDOM() {
+        const contactListContainer = document.getElementById(
+          'contact-list-container',
+        );
+        // Attaches contact list element to contact list container
+        contactListContainer.appendChild(
+          ContactListComponent.contactListElement,
+        );
+      }
+
+      initializeDOM();
     </script>
   </body>
 </html>
